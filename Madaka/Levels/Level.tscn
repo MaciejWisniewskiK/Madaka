@@ -44372,7 +44372,7 @@ size = Vector2(27, 14)
 
 [node name="Player" parent="." instance=ExtResource("1_3y3qp")]
 z_index = 10
-position = Vector2(101, 80)
+position = Vector2(89, 86)
 
 [node name="Map" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mianl")
@@ -44445,3 +44445,7 @@ shape = SubResource("RectangleShape2D_2xtiw")
 position = Vector2(133, 43)
 
 [node name="fireplace" parent="Map" instance=ExtResource("10_6tkh6")]
+
+[node name="Darkness" type="DirectionalLight2D" parent="."]
+visible = false
+blend_mode = 1
