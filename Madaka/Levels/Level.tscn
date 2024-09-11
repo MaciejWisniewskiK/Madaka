@@ -44393,29 +44393,34 @@ region_rect = Rect2(48, 128, 48, 32)
 [node name="couch1" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(240, 92)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch1"]
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_qnwhg")
+
 [node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/couch1"]
 texture = ExtResource("2_8aph7")
 region_enabled = true
 region_rect = Rect2(448, 128, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch1"]
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_qnwhg")
-
 [node name="couch2" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(265, 72)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch2"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_stw6c")
 
 [node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/couch2"]
 texture = ExtResource("2_8aph7")
 region_enabled = true
 region_rect = Rect2(432, 112, 16, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch2"]
-position = Vector2(0.5, 1.5)
-shape = SubResource("RectangleShape2D_stw6c")
-
 [node name="table" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(239, 71)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/table"]
+position = Vector2(2, 0)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_xcke8")
 
 [node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/table"]
 position = Vector2(1, 0)
@@ -44423,13 +44428,12 @@ texture = ExtResource("7_c8c71")
 region_enabled = true
 region_rect = Rect2(128, 0, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/table"]
-position = Vector2(2, 0)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_xcke8")
-
 [node name="TV table" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(238, 49)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/TV table"]
+position = Vector2(1.5, -1)
+shape = SubResource("RectangleShape2D_2xtiw")
 
 [node name="TV table" type="Sprite2D" parent="Map/TV corner/TV table"]
 position = Vector2(1, -2)
@@ -44437,12 +44441,8 @@ texture = ExtResource("4_s2jxh")
 region_enabled = true
 region_rect = Rect2(382, 0, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/TV table"]
-position = Vector2(1.5, -1)
-shape = SubResource("RectangleShape2D_2xtiw")
-
 [node name="TV" parent="Map/TV corner" instance=ExtResource("9_i8hi6")]
-position = Vector2(133, 43)
+position = Vector2(239, 34)
 
 [node name="fireplace" parent="Map" instance=ExtResource("10_6tkh6")]
 
