@@ -1,15 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://r88crqhxgfjs"]
+[gd_scene load_steps=19 format=3 uid="uid://r88crqhxgfjs"]
 
 [ext_resource type="PackedScene" uid="uid://bvvkcdqwj81ee" path="res://Characters/player.tscn" id="1_3y3qp"]
 [ext_resource type="Texture2D" uid="uid://ydxwbyhag438" path="res://Interior/furniture/couches.png" id="2_8aph7"]
 [ext_resource type="Texture2D" uid="uid://j2j4vpvjest2" path="res://Interior/basics/curtains.png" id="2_ktwdi"]
-[ext_resource type="Texture2D" uid="uid://cytbw8ab53giv" path="res://Interior/basics/fireplaces.png" id="4_3s4vw"]
 [ext_resource type="Texture2D" uid="uid://fmeojgksjmrc" path="res://Interior/furniture/storage.png" id="4_s2jxh"]
 [ext_resource type="Texture2D" uid="uid://crlrbcvik0rti" path="res://Interior/basics/rugs.png" id="5_5hg6i"]
 [ext_resource type="Texture2D" uid="uid://c0nwkf2kj7452" path="res://Interior/basics/stairs.png" id="6_kq132"]
 [ext_resource type="Texture2D" uid="uid://cm2nwphg8jdiw" path="res://Interior/furniture/couchtables_shadow.png" id="7_c8c71"]
 [ext_resource type="Texture2D" uid="uid://dhbg71wr4a36p" path="res://Interior/basics/wallpapers.png" id="7_fsmjj"]
 [ext_resource type="PackedScene" uid="uid://b4xtdlr0jo47x" path="res://scenes/tv.tscn" id="9_i8hi6"]
+[ext_resource type="PackedScene" uid="uid://xwvl3infx722" path="res://scenes/fireplace.tscn" id="10_6tkh6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8pdpq"]
 texture = ExtResource("2_ktwdi")
@@ -44368,16 +44368,13 @@ height = 18.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xtiw"]
 size = Vector2(27, 14)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wku3i"]
-size = Vector2(27, 22)
-
 [node name="Level" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_3y3qp")]
 z_index = 10
 position = Vector2(101, 80)
 
-[node name="Mapa" type="TileMap" parent="."]
+[node name="Map" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mianl")
 format = 2
 layer_0/name = "Floor"
@@ -44385,76 +44382,66 @@ layer_0/tile_data = PackedInt32Array(65537, 458761, 38, 131073, 458761, 38, 1966
 layer_1/name = "Wall"
 layer_1/tile_data = PackedInt32Array(0, 131081, 24, 1, 196617, 24, 2, 196617, 24, 3, 196617, 24, 4, 196617, 24, 5, 196617, 24, 6, 196617, 24, 7, 196617, 24, 8, 196617, 24, 9, 196617, 24, 10, 196617, 24, 11, 196617, 24, 12, 196617, 24, 13, 196617, 24, 14, 196617, 24, 15, 196617, 24, 16, 196617, 24, 65537, 655369, 20, 131073, 655369, 21, 65538, 720905, 20, 131074, 720905, 21, 65539, 786441, 20, 131075, 786441, 21, 65540, 655369, 20, 131076, 655369, 21, 65541, 720905, 20, 131077, 720905, 21, 65542, 786441, 20, 131078, 786441, 21, 65543, 655369, 20, 131079, 655369, 21, 65544, 720905, 20, 131080, 720905, 21, 65545, 786441, 20, 131081, 786441, 21, 65546, 655369, 20, 131082, 655369, 21, 65547, 720905, 20, 131083, 720905, 21, 65548, 786441, 20, 131084, 786441, 21, 65549, 655369, 20, 131085, 655369, 21, 65550, 720905, 20, 131086, 720905, 21, 65551, 786441, 20, 131087, 786441, 21, 65552, 655369, 20, 131088, 655369, 21, 65536, 393225, 25, 131072, 393225, 25, 196608, 393225, 25, 262144, 393225, 25, 327680, 393225, 25, 393216, 393225, 25, 458752, 393225, 25, 524288, 393225, 25, 589824, 393225, 25, 17, 262153, 24, 65553, 262153, 25, 131089, 262153, 25, 196625, 262153, 25, 262161, 262153, 25, 327697, 262153, 25, 393233, 262153, 25, 458769, 262153, 25, 524305, 262153, 25, 589841, 262153, 25, 655377, 262153, 26, 655360, 131081, 26, 655361, 196617, 26, 655362, 196617, 26, 655363, 196617, 26, 655364, 196617, 26, 655365, 196617, 26, 655366, 196617, 26, 655367, 196617, 26, 655368, 196617, 26, 655369, 196617, 26, 655370, 196617, 26, 655371, 196617, 26, 655372, 196617, 26, 655373, 196617, 26, 655374, 196617, 26, 655375, 196617, 26, 655376, 196617, 26)
 
-[node name="TV corner" type="Node" parent="Mapa"]
+[node name="TV corner" type="Node" parent="Map"]
 
-[node name="rug" type="Sprite2D" parent="Mapa/TV corner"]
+[node name="rug" type="Sprite2D" parent="Map/TV corner"]
 position = Vector2(240, 73)
 texture = ExtResource("5_5hg6i")
 region_enabled = true
 region_rect = Rect2(48, 128, 48, 32)
 
-[node name="couch1" type="StaticBody2D" parent="Mapa/TV corner"]
+[node name="couch1" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(240, 92)
 
-[node name="Sprite2D" type="Sprite2D" parent="Mapa/TV corner/couch1"]
+[node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/couch1"]
 texture = ExtResource("2_8aph7")
 region_enabled = true
 region_rect = Rect2(448, 128, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/TV corner/couch1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch1"]
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_qnwhg")
 
-[node name="couch2" type="StaticBody2D" parent="Mapa/TV corner"]
+[node name="couch2" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(265, 72)
 
-[node name="Sprite2D" type="Sprite2D" parent="Mapa/TV corner/couch2"]
+[node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/couch2"]
 texture = ExtResource("2_8aph7")
 region_enabled = true
 region_rect = Rect2(432, 112, 16, 32)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/TV corner/couch2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/couch2"]
 position = Vector2(0.5, 1.5)
 shape = SubResource("RectangleShape2D_stw6c")
 
-[node name="table" type="StaticBody2D" parent="Mapa/TV corner"]
+[node name="table" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(239, 71)
 
-[node name="Sprite2D" type="Sprite2D" parent="Mapa/TV corner/table"]
+[node name="Sprite2D" type="Sprite2D" parent="Map/TV corner/table"]
 position = Vector2(1, 0)
 texture = ExtResource("7_c8c71")
 region_enabled = true
 region_rect = Rect2(128, 0, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/TV corner/table"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/table"]
 position = Vector2(2, 0)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_xcke8")
 
-[node name="TV table" type="StaticBody2D" parent="Mapa/TV corner"]
+[node name="TV table" type="StaticBody2D" parent="Map/TV corner"]
 position = Vector2(238, 49)
 
-[node name="TV table" type="Sprite2D" parent="Mapa/TV corner/TV table"]
+[node name="TV table" type="Sprite2D" parent="Map/TV corner/TV table"]
 position = Vector2(1, -2)
 texture = ExtResource("4_s2jxh")
 region_enabled = true
 region_rect = Rect2(382, 0, 32, 16)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/TV corner/TV table"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/TV corner/TV table"]
 position = Vector2(1.5, -1)
 shape = SubResource("RectangleShape2D_2xtiw")
 
-[node name="TV" parent="Mapa/TV corner" instance=ExtResource("9_i8hi6")]
+[node name="TV" parent="Map/TV corner" instance=ExtResource("9_i8hi6")]
 position = Vector2(133, 43)
 
-[node name="fireplace" type="StaticBody2D" parent="Mapa"]
-position = Vector2(142, 40)
-
-[node name="Sprite2D" type="Sprite2D" parent="Mapa/fireplace"]
-texture = ExtResource("4_3s4vw")
-region_enabled = true
-region_rect = Rect2(304, 0, 32, 32)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mapa/fireplace"]
-position = Vector2(0.5, 5)
-shape = SubResource("RectangleShape2D_wku3i")
+[node name="fireplace" parent="Map" instance=ExtResource("10_6tkh6")]

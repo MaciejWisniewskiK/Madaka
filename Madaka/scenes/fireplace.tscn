@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=3 uid="uid://xwvl3infx722"]
+
+[ext_resource type="Texture2D" uid="uid://c0labbovxt3ld" path="res://Interior/fireplace and candles/BlackFirePlaceSheet.png" id="1_7kfa7"]
+[ext_resource type="Script" path="res://scenes/fireplace.gd" id="1_kf8ls"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wku3i"]
+size = Vector2(27, 22)
+
+[sub_resource type="Animation" id="Animation_oglif"]
+resource_name = "FireOff"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_f2m7h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_j1iu2"]
+resource_name = "FireOn"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ci0ei"]
+_data = {
+"FireOff": SubResource("Animation_oglif"),
+"FireOn": SubResource("Animation_j1iu2"),
+"RESET": SubResource("Animation_f2m7h")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pe2eo"]
+animation = &"FireOff"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nh0mk"]
+animation = &"FireOn"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_epb6r"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0dlal"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_movgf"]
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_55ttq"]
+states/FireOff/node = SubResource("AnimationNodeAnimation_pe2eo")
+states/FireOff/position = Vector2(421, 100)
+states/FireOn/node = SubResource("AnimationNodeAnimation_nh0mk")
+states/FireOn/position = Vector2(635, 100)
+transitions = ["Start", "FireOff", SubResource("AnimationNodeStateMachineTransition_epb6r"), "FireOff", "FireOn", SubResource("AnimationNodeStateMachineTransition_0dlal"), "FireOn", "FireOff", SubResource("AnimationNodeStateMachineTransition_movgf")]
+
+[node name="fireplace" type="StaticBody2D"]
+position = Vector2(142, 40)
+script = ExtResource("1_kf8ls")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 5)
+shape = SubResource("RectangleShape2D_wku3i")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7kfa7")
+hframes = 6
+frame = 5
+region_rect = Rect2(304, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ci0ei")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_55ttq")
+anim_player = NodePath("../AnimationPlayer")
