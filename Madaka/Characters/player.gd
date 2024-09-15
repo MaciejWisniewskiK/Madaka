@@ -1,7 +1,9 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 
 const SPEED = 100.0
+@onready var health : Health = $Health
+
 
 func _physics_process(delta):
 	var direction = Vector2(
@@ -11,3 +13,7 @@ func _physics_process(delta):
 	
 	velocity = SPEED * direction;
 	move_and_slide()
+
+
+func _on_health_damaged(amount, knockback):
+	print("player damaged by: %d" % amount)

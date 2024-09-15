@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dhbg71wr4a36p" path="res://Interior/basics/wallpapers.png" id="7_fsmjj"]
 [ext_resource type="PackedScene" uid="uid://b4xtdlr0jo47x" path="res://scenes/tv.tscn" id="9_i8hi6"]
 [ext_resource type="PackedScene" uid="uid://xwvl3infx722" path="res://scenes/fireplace.tscn" id="10_6tkh6"]
-[ext_resource type="PackedScene" uid="uid://dpythpjklduhv" path="res://Characters/madaka.tscn" id="11_5bs7g"]
+[ext_resource type="PackedScene" uid="uid://40c5c33pto80" path="res://Characters/madaka.tscn" id="11_5bs7g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8pdpq"]
 texture = ExtResource("2_ktwdi")
@@ -44369,9 +44369,9 @@ height = 18.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2xtiw"]
 size = Vector2(27, 14)
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" groups=["level"]]
 
-[node name="Player" parent="." instance=ExtResource("1_3y3qp")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_3y3qp")]
 z_index = 10
 position = Vector2(89, 86)
 

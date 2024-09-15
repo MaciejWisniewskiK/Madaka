@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://vrnk23gyvrwu"]
+
+[ext_resource type="Script" path="res://projectiles/FancyProjectile.gd" id="1_26882"]
+[ext_resource type="Texture2D" uid="uid://cwrhbgpokegof" path="res://SproutLands/Objects/Egg_item.png" id="2_28tde"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovivq"]
+radius = 7.0
+
+[node name="FancyProjectile" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_26882")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_28tde")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ovivq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

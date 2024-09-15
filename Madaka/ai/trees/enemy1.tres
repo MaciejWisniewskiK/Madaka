@@ -1,0 +1,36 @@
+[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://b8mnp6x4rfnot"]
+
+[ext_resource type="Script" path="res://ai/tasks/find_player.gd" id="1_20o1b"]
+[ext_resource type="Script" path="res://ai/tasks/double_attack.gd" id="2_ehtvk"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_v2pbv"]
+
+[sub_resource type="BTAction" id="BTAction_vvdcn"]
+script = ExtResource("1_20o1b")
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_424a7"]
+script = ExtResource("2_ehtvk")
+target_var = &"target"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_v6y7h"]
+text = "fancy attack"
+
+[sub_resource type="BTSequence" id="BTSequence_isdug"]
+custom_name = "FancyAttack"
+children = [SubResource("BTAction_vvdcn"), SubResource("BTAction_424a7"), SubResource("BTConsolePrint_v6y7h")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_r73y0"]
+duration = 3.0
+children = [SubResource("BTSequence_isdug")]
+
+[sub_resource type="BTSequence" id="BTSequence_vso2p"]
+custom_name = "RandomSequence"
+children = [SubResource("BTCooldown_r73y0")]
+
+[sub_resource type="BTSelector" id="BTSelector_h4750"]
+children = [SubResource("BTSequence_vso2p")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_v2pbv")
+root_task = SubResource("BTSelector_h4750")
