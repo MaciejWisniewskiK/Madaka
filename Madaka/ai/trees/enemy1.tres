@@ -1,7 +1,8 @@
-[gd_resource type="BehaviorTree" load_steps=11 format=3 uid="uid://b8mnp6x4rfnot"]
+[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://b8mnp6x4rfnot"]
 
 [ext_resource type="Script" path="res://ai/tasks/find_player.gd" id="1_20o1b"]
 [ext_resource type="Script" path="res://ai/tasks/double_attack.gd" id="2_ehtvk"]
+[ext_resource type="Script" path="res://ai/tasks/spawn_przydupas.gd" id="3_ns3vi"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_v2pbv"]
 
@@ -18,18 +19,31 @@ text = "fancy attack"
 
 [sub_resource type="BTSequence" id="BTSequence_isdug"]
 custom_name = "FancyAttack"
-children = [SubResource("BTAction_vvdcn"), SubResource("BTAction_424a7"), SubResource("BTConsolePrint_v6y7h")]
+children = [SubResource("BTAction_424a7"), SubResource("BTConsolePrint_v6y7h")]
 
-[sub_resource type="BTCooldown" id="BTCooldown_r73y0"]
-duration = 3.0
-children = [SubResource("BTSequence_isdug")]
+[sub_resource type="BTAction" id="BTAction_teu7c"]
+script = ExtResource("3_ns3vi")
+target_var = &"target"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_77j1c"]
+custom_name = "przydupas spawned"
+
+[sub_resource type="BTSequence" id="BTSequence_dktia"]
+custom_name = "SpawnPrzydupasy"
+children = [SubResource("BTAction_teu7c"), SubResource("BTConsolePrint_77j1c")]
 
 [sub_resource type="BTSequence" id="BTSequence_vso2p"]
 custom_name = "RandomSequence"
-children = [SubResource("BTCooldown_r73y0")]
+children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_wxoac"]
+duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_grwkl"]
+children = [SubResource("BTAction_vvdcn"), SubResource("BTSequence_vso2p"), SubResource("BTCooldown_wxoac")]
 
 [sub_resource type="BTSelector" id="BTSelector_h4750"]
-children = [SubResource("BTSequence_vso2p")]
+children = [SubResource("BTSequence_grwkl")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_v2pbv")

@@ -1,7 +1,7 @@
 class_name Player extends CharacterBody2D
 
 
-const SPEED = 100.0
+var SPEED = 100.0
 @onready var health : Health = $Health
 
 
