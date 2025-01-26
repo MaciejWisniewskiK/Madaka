@@ -1,20 +1,21 @@
 class_name FancyProjectile extends Area2D
 
-var enemy_position: Vector2
-var player_position: Vector2
+var start_position: Vector2
+var end_position: Vector2
 var control_point: Vector2
 var t: float = 0.0  # The interpolation factor (between 0 and 1)
 var speed: float = 1.0  # Speed of the projectile
 var projectile_position: Vector2
 var bend_intensity: float = 100.0  # Controls how strong the curve is
 var curve_direction = 1
+var returning: bool = false
 
 func _ready():
-	enemy_position = global_position  # Starting position of the enemy
-	control_point = calculate_control_point(enemy_position, player_position)  # Curve control
+	start_position = global_position  # Starting position of the enemy
+	control_point = calculate_control_point(start_position, end_position)  # Curve control
 	
 	# Initial position
-	projectile_position = enemy_position
+	projectile_position = start_position
 	
 	# Start the projectile's movement
 	set_process(true)
@@ -26,15 +27,21 @@ func _process(delta):
 	
 	# Cap 't' at 1.0 to stop when it reaches the player
 	if t > 1.0:
-		t = 1.0
-		set_process(false) # Stop processing once the projectile hits the player
+		if returning == false:
+			returning = true
+			t = 0
+			var tmp = start_position
+			start_position = end_position
+			end_position = tmp
+		else:
+			queue_free()
 
 	# Calculate the new position using the quadratic Bezier formula
-	projectile_position = calculate_bezier_position(enemy_position, control_point, player_position, t)
+	projectile_position = calculate_bezier_position(start_position, control_point, end_position)
 	global_position = projectile_position
 
 # Function to calculate the Bezier curve position
-func calculate_bezier_position(p0: Vector2, p1: Vector2, p2: Vector2, t: float) -> Vector2:
+func calculate_bezier_position(p0: Vector2, p1: Vector2, p2: Vector2) -> Vector2:
 	var one_minus_t = 1.0 - t
 	return one_minus_t * one_minus_t * p0 + 2 * one_minus_t * t * p1 + t * t * p2
 
