@@ -32,18 +32,19 @@ custom_name = "przydupas spawned"
 custom_name = "SpawnPrzydupasy"
 children = [SubResource("BTAction_teu7c"), SubResource("BTConsolePrint_77j1c")]
 
-[sub_resource type="BTSequence" id="BTSequence_vso2p"]
-custom_name = "RandomSequence"
+[sub_resource type="BTRandomSelector" id="BTRandomSelector_nbebk"]
+custom_name = "Random Attack"
 children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia")]
+
+[sub_resource type="BTSequence" id="BTSequence_grwkl"]
+children = [SubResource("BTAction_vvdcn"), SubResource("BTRandomSelector_nbebk")]
 
 [sub_resource type="BTCooldown" id="BTCooldown_wxoac"]
 duration = 3.0
-
-[sub_resource type="BTSequence" id="BTSequence_grwkl"]
-children = [SubResource("BTAction_vvdcn"), SubResource("BTSequence_vso2p"), SubResource("BTCooldown_wxoac")]
+children = [SubResource("BTSequence_grwkl")]
 
 [sub_resource type="BTSelector" id="BTSelector_h4750"]
-children = [SubResource("BTSequence_grwkl")]
+children = [SubResource("BTCooldown_wxoac")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_v2pbv")

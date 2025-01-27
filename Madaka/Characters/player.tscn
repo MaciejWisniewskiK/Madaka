@@ -22,4 +22,8 @@ shape = SubResource("RectangleShape2D_fa6og")
 [node name="Health" type="Node" parent="."]
 script = ExtResource("3_380gt")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
