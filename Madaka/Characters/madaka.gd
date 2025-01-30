@@ -6,4 +6,3 @@ extends CharacterBody2D
 func _physics_process(delta):
 	#rotation_degrees += 50 * delta	
 	pass
-

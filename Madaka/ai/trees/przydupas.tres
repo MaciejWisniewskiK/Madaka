@@ -1,0 +1,40 @@
+[gd_resource type="BehaviorTree" load_steps=12 format=3 uid="uid://7cr1egbfhjfd"]
+
+[ext_resource type="Script" path="res://ai/tasks/close_on_target.gd" id="1_dnxgc"]
+[ext_resource type="Script" path="res://ai/tasks/charge_jump.gd" id="2_10lkd"]
+[ext_resource type="Script" path="res://ai/tasks/jump_on_target.gd" id="3_hjim3"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_ou5w4"]
+
+[sub_resource type="BTAction" id="BTAction_5rdvx"]
+script = ExtResource("1_dnxgc")
+target_pos_var = &"target_pos"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_hb5oq"]
+time_limit = 3.0
+children = [SubResource("BTAction_5rdvx")]
+
+[sub_resource type="BTAlwaysSucceed" id="BTAlwaysSucceed_l7on1"]
+children = [SubResource("BTTimeLimit_hb5oq")]
+
+[sub_resource type="BTAction" id="BTAction_hdqx5"]
+script = ExtResource("2_10lkd")
+initial_speed = 300.0
+charge_time = 2.0
+target_pos_var = &"target_pos"
+
+[sub_resource type="BTAction" id="BTAction_7dqhp"]
+script = ExtResource("3_hjim3")
+initial_speed = 300.0
+target_pos_var = &"target_pos"
+
+[sub_resource type="BTTimeLimit" id="BTTimeLimit_rx7i1"]
+time_limit = 3.0
+children = [SubResource("BTAction_7dqhp")]
+
+[sub_resource type="BTSequence" id="BTSequence_uicwc"]
+children = [SubResource("BTAlwaysSucceed_l7on1"), SubResource("BTAction_hdqx5"), SubResource("BTTimeLimit_rx7i1")]
+
+[resource]
+blackboard_plan = SubResource("BlackboardPlan_ou5w4")
+root_task = SubResource("BTSequence_uicwc")

@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://bpct4u8ercurk"]
+
+[ext_resource type="Script" path="res://Characters/Przydupas.gd" id="1_k0nm7"]
+[ext_resource type="Texture2D" uid="uid://cmps7jukrmh52" path="res://SproutLands/Characters/Free Chicken Sprites.png" id="2_8njmj"]
+[ext_resource type="BehaviorTree" uid="uid://7cr1egbfhjfd" path="res://ai/trees/przydupas.tres" id="3_dw7pw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c1asl"]
+friction = 0.2
+bounce = 0.8
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1vv8i"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0c26"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpdk2"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v30iu"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjuqe"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amf4a"]
+atlas = ExtResource("2_8njmj")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6ebi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1vv8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0c26")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpdk2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v30iu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjuqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amf4a")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rntff"]
+radius = 6.0
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_144uy"]
+
+[node name="Przydupas" type="RigidBody2D"]
+collision_layer = 4
+physics_material_override = SubResource("PhysicsMaterial_c1asl")
+script = ExtResource("1_k0nm7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, 0)
+sprite_frames = SubResource("SpriteFrames_y6ebi")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.08165e-12, 0.5)
+shape = SubResource("CircleShape2D_rntff")
+
+[node name="BTPlayer" type="BTPlayer" parent="."]
+behavior_tree = ExtResource("3_dw7pw")
+blackboard_plan = SubResource("BlackboardPlan_144uy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
