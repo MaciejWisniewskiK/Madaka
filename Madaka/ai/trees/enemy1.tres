@@ -1,14 +1,16 @@
-[gd_resource type="BehaviorTree" load_steps=16 format=3 uid="uid://b8mnp6x4rfnot"]
+[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://b8mnp6x4rfnot"]
 
 [ext_resource type="Script" path="res://ai/tasks/find_player.gd" id="1_20o1b"]
 [ext_resource type="Script" path="res://ai/tasks/double_attack.gd" id="2_ehtvk"]
 [ext_resource type="Script" path="res://ai/tasks/spawn_przydupas.gd" id="3_ns3vi"]
+[ext_resource type="Script" path="res://ai/tasks/lights_off.gd" id="4_s0707"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_v2pbv"]
 
 [sub_resource type="BTAction" id="BTAction_vvdcn"]
 script = ExtResource("1_20o1b")
 target_var = &"target"
+darkness_var = &"darkness"
 
 [sub_resource type="BTAction" id="BTAction_424a7"]
 script = ExtResource("2_ehtvk")
@@ -32,9 +34,21 @@ custom_name = "przydupas spawned"
 custom_name = "SpawnPrzydupasy"
 children = [SubResource("BTAction_teu7c"), SubResource("BTConsolePrint_77j1c")]
 
+[sub_resource type="BTAction" id="BTAction_24m8w"]
+script = ExtResource("4_s0707")
+darkness_var = &"darkness"
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_y6dvn"]
+text = "Madaka turned the lights off"
+custom_name = "Log Lights off"
+
+[sub_resource type="BTSequence" id="BTSequence_su3gr"]
+custom_name = "Lights Off"
+children = [SubResource("BTAction_24m8w"), SubResource("BTConsolePrint_y6dvn")]
+
 [sub_resource type="BTRandomSelector" id="BTRandomSelector_nbebk"]
 custom_name = "Random Attack"
-children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia")]
+children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia"), SubResource("BTSequence_su3gr")]
 
 [sub_resource type="BTSequence" id="BTSequence_grwkl"]
 children = [SubResource("BTAction_vvdcn"), SubResource("BTRandomSelector_nbebk")]

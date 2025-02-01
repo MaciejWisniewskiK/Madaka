@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://r88crqhxgfjs"]
+[gd_scene load_steps=21 format=3 uid="uid://r88crqhxgfjs"]
 
 [ext_resource type="PackedScene" uid="uid://bvvkcdqwj81ee" path="res://Characters/player.tscn" id="1_3y3qp"]
 [ext_resource type="Texture2D" uid="uid://ydxwbyhag438" path="res://Interior/furniture/couches.png" id="2_8aph7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b4xtdlr0jo47x" path="res://scenes/tv.tscn" id="9_i8hi6"]
 [ext_resource type="PackedScene" uid="uid://xwvl3infx722" path="res://scenes/fireplace.tscn" id="10_6tkh6"]
 [ext_resource type="PackedScene" uid="uid://40c5c33pto80" path="res://Characters/madaka.tscn" id="11_5bs7g"]
+[ext_resource type="PackedScene" uid="uid://dasr7vucyf05h" path="res://scenes/darkness.tscn" id="11_cccl5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8pdpq"]
 texture = ExtResource("2_ktwdi")
@@ -44447,9 +44448,7 @@ position = Vector2(239, 34)
 
 [node name="fireplace" parent="Map" instance=ExtResource("10_6tkh6")]
 
-[node name="Darkness" type="DirectionalLight2D" parent="."]
-visible = false
-blend_mode = 1
+[node name="Darkness" parent="." groups=["darkness"] instance=ExtResource("11_cccl5")]
 
 [node name="Madaka" parent="." instance=ExtResource("11_5bs7g")]
 position = Vector2(131, 117)
