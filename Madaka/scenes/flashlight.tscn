@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://budquydtlocvu"]
+
+[ext_resource type="Script" path="res://scenes/flashlight.gd" id="1_e5tmp"]
+[ext_resource type="Texture2D" uid="uid://c7aomwm2asy7b" path="res://Textures/flashlight_texture.png" id="2_o14nb"]
+
+[node name="Flashlight" type="Node2D"]
+script = ExtResource("1_e5tmp")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.994987, 1, 0.47325, 1)
+texture = ExtResource("2_o14nb")
+offset = Vector2(64, 4)
+texture_scale = 2.0

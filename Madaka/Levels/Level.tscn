@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://r88crqhxgfjs"]
+[gd_scene load_steps=22 format=3 uid="uid://r88crqhxgfjs"]
 
 [ext_resource type="PackedScene" uid="uid://bvvkcdqwj81ee" path="res://Characters/player.tscn" id="1_3y3qp"]
 [ext_resource type="Texture2D" uid="uid://ydxwbyhag438" path="res://Interior/furniture/couches.png" id="2_8aph7"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://xwvl3infx722" path="res://scenes/fireplace.tscn" id="10_6tkh6"]
 [ext_resource type="PackedScene" uid="uid://40c5c33pto80" path="res://Characters/madaka.tscn" id="11_5bs7g"]
 [ext_resource type="PackedScene" uid="uid://dasr7vucyf05h" path="res://scenes/darkness.tscn" id="11_cccl5"]
+[ext_resource type="PackedScene" uid="uid://budquydtlocvu" path="res://scenes/flashlight.tscn" id="13_0vxj7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8pdpq"]
 texture = ExtResource("2_ktwdi")
@@ -44375,6 +44376,8 @@ size = Vector2(27, 14)
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_3y3qp")]
 z_index = 10
 position = Vector2(89, 86)
+
+[node name="Flashlight" parent="Player" instance=ExtResource("13_0vxj7")]
 
 [node name="Map" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mianl")
