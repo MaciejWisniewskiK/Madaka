@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvvkcdqwj81ee"]
+[gd_scene load_steps=6 format=3 uid="uid://bvvkcdqwj81ee"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_dv7od"]
 [ext_resource type="Texture2D" uid="uid://cew7r64ft0hvr" path="res://SproutLands/Characters/Basic Charakter Spritesheet.png" id="1_gl2ey"]
-[ext_resource type="Script" path="res://demo/agents/scripts/health.gd" id="3_380gt"]
+[ext_resource type="Script" path="res://UI/health.gd" id="3_5oxqx"]
+[ext_resource type="PackedScene" uid="uid://cq37bg1rlyeaa" path="res://UI/healthbar.tscn" id="4_n8qe6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fa6og"]
 size = Vector2(10, 5)
@@ -20,10 +21,18 @@ position = Vector2(0, 4.5)
 shape = SubResource("RectangleShape2D_fa6og")
 
 [node name="Health" type="Node" parent="."]
-script = ExtResource("3_380gt")
+script = ExtResource("3_5oxqx")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 
+[node name="PlayerHealthbar" parent="." node_paths=PackedStringArray("health") instance=ExtResource("4_n8qe6")]
+offset_left = -15.0
+offset_top = -21.0
+offset_right = 25.0
+offset_bottom = 19.0
+health = NodePath("../Health")
+
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
+[connection signal="death" from="Health" to="." method="_on_health_death"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

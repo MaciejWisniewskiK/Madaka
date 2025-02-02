@@ -68,5 +68,5 @@ func calculate_control_point(start: Vector2, end: Vector2) -> Vector2:
 
 func _on_body_entered(body):
 	if body is Player:
-		body.health.take_damage(1, Vector2.ZERO)
+		body.health.take_damage(1)
 		queue_free()

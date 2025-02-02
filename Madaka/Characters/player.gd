@@ -4,8 +4,8 @@ class_name Player extends CharacterBody2D
 var SPEED = 100.0
 var slow_modifier = 0
 @onready var health : Health = $Health
+@onready var player_healthbar = $PlayerHealthbar
 @onready var timer = $Timer
-
 
 func _physics_process(delta):
 	var direction = Vector2(
@@ -16,9 +16,6 @@ func _physics_process(delta):
 	velocity = (SPEED * (1 - slow_modifier)) * direction;
 	move_and_slide()
 
-
-func _on_health_damaged(amount, knockback):
-	print("player damaged by: %d" % amount)
 	
 func apply_slow(amount, duration):
 	timer.start(duration)
@@ -28,3 +25,9 @@ func apply_slow(amount, duration):
 func _on_timer_timeout():
 	slow_modifier = 0
 	print("Timer stop")
+
+func _on_health_damaged(amount, current):
+	print("player damaged by:", amount, ", current health", current)
+
+func _on_health_death():
+	get_tree().change_scene_to_file("res://UI/game_over.tscn")
