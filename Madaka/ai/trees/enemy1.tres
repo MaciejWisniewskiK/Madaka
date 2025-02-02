@@ -1,16 +1,21 @@
-[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://b8mnp6x4rfnot"]
+[gd_resource type="BehaviorTree" load_steps=29 format=3 uid="uid://b8mnp6x4rfnot"]
 
 [ext_resource type="Script" path="res://ai/tasks/find_player.gd" id="1_20o1b"]
 [ext_resource type="Script" path="res://ai/tasks/double_attack.gd" id="2_ehtvk"]
 [ext_resource type="Script" path="res://ai/tasks/spawn_przydupas.gd" id="3_ns3vi"]
+[ext_resource type="Script" path="res://ai/tasks/find_darkness.gd" id="4_3xgcj"]
 [ext_resource type="Script" path="res://ai/tasks/lights_off.gd" id="4_s0707"]
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_v2pbv"]
+var/lights_off/name = &"lights_off"
+var/lights_off/type = 1
+var/lights_off/value = false
+var/lights_off/hint = 0
+var/lights_off/hint_string = "Lights have been turned off"
 
 [sub_resource type="BTAction" id="BTAction_vvdcn"]
 script = ExtResource("1_20o1b")
 target_var = &"target"
-darkness_var = &"darkness"
 
 [sub_resource type="BTAction" id="BTAction_424a7"]
 script = ExtResource("2_ehtvk")
@@ -28,11 +33,51 @@ script = ExtResource("3_ns3vi")
 target_var = &"target"
 
 [sub_resource type="BTConsolePrint" id="BTConsolePrint_77j1c"]
+text = "Przydupas spawned"
 custom_name = "przydupas spawned"
 
 [sub_resource type="BTSequence" id="BTSequence_dktia"]
 custom_name = "SpawnPrzydupasy"
 children = [SubResource("BTAction_teu7c"), SubResource("BTConsolePrint_77j1c")]
+
+[sub_resource type="BTRandomSelector" id="BTRandomSelector_nbebk"]
+custom_name = "Random Attack"
+children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia")]
+
+[sub_resource type="BTSequence" id="BTSequence_grwkl"]
+children = [SubResource("BTAction_vvdcn"), SubResource("BTRandomSelector_nbebk")]
+
+[sub_resource type="BTCooldown" id="BTCooldown_wxoac"]
+duration = 3.0
+children = [SubResource("BTSequence_grwkl")]
+
+[sub_resource type="BTRepeat" id="BTRepeat_ul80t"]
+forever = true
+children = [SubResource("BTCooldown_wxoac")]
+
+[sub_resource type="BBVariant" id="BBVariant_xbej1"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckVar" id="BTCheckVar_d222w"]
+variable = &"lights_off"
+value = SubResource("BBVariant_xbej1")
+custom_name = "Check if lights on"
+
+[sub_resource type="BBVariant" id="BBVariant_ssfuf"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTSetVar" id="BTSetVar_nrgm3"]
+variable = &"lights_off"
+value = SubResource("BBVariant_ssfuf")
+custom_name = "Set lights off"
+
+[sub_resource type="BTAction" id="BTAction_ucm3j"]
+script = ExtResource("4_3xgcj")
+darkness_var = &"darkness"
 
 [sub_resource type="BTAction" id="BTAction_24m8w"]
 script = ExtResource("4_s0707")
@@ -44,21 +89,19 @@ custom_name = "Log Lights off"
 
 [sub_resource type="BTSequence" id="BTSequence_su3gr"]
 custom_name = "Lights Off"
-children = [SubResource("BTAction_24m8w"), SubResource("BTConsolePrint_y6dvn")]
+children = [SubResource("BTCheckVar_d222w"), SubResource("BTSetVar_nrgm3"), SubResource("BTAction_ucm3j"), SubResource("BTAction_24m8w"), SubResource("BTConsolePrint_y6dvn")]
 
-[sub_resource type="BTRandomSelector" id="BTRandomSelector_nbebk"]
-custom_name = "Random Attack"
-children = [SubResource("BTSequence_isdug"), SubResource("BTSequence_dktia"), SubResource("BTSequence_su3gr")]
+[sub_resource type="BTDelay" id="BTDelay_yw2xl"]
+seconds = 20.0
+children = [SubResource("BTSequence_su3gr")]
 
-[sub_resource type="BTSequence" id="BTSequence_grwkl"]
-children = [SubResource("BTAction_vvdcn"), SubResource("BTRandomSelector_nbebk")]
-
-[sub_resource type="BTCooldown" id="BTCooldown_wxoac"]
-duration = 3.0
-children = [SubResource("BTSequence_grwkl")]
+[sub_resource type="BTParallel" id="BTParallel_0puop"]
+num_successes_required = 2
+num_failures_required = 2
+children = [SubResource("BTRepeat_ul80t"), SubResource("BTDelay_yw2xl")]
 
 [sub_resource type="BTSelector" id="BTSelector_h4750"]
-children = [SubResource("BTCooldown_wxoac")]
+children = [SubResource("BTParallel_0puop")]
 
 [resource]
 blackboard_plan = SubResource("BlackboardPlan_v2pbv")
