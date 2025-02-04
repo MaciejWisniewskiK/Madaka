@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@export var inv : Inv
 
 var SPEED = 100.0
 var slow_modifier = 0

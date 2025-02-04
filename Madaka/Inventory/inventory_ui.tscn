@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://hnh74mr58dsl"]
+
+[ext_resource type="PackedScene" uid="uid://clum7v0rsykv3" path="res://Inventory/inv_ui_slot.tscn" id="1_8nfdx"]
+
+[node name="Inventory_UI" type="Control"]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -144.0
+offset_right = -28.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 20.0
+color = Color(0.0554347, 0.334407, 0.373354, 1)
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -8.0
+offset_right = 48.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+
+[node name="inv_ui_slot1" parent="ColorRect/GridContainer" instance=ExtResource("1_8nfdx")]
+layout_mode = 2
+
+[node name="inv_ui_slot2" parent="ColorRect/GridContainer" instance=ExtResource("1_8nfdx")]
+layout_mode = 2
+
+[node name="inv_ui_slot3" parent="ColorRect/GridContainer" instance=ExtResource("1_8nfdx")]
+layout_mode = 2
+
+[node name="inv_ui_slot4" parent="ColorRect/GridContainer" instance=ExtResource("1_8nfdx")]
+layout_mode = 2
+
+[node name="inv_ui_slot5" parent="ColorRect/GridContainer" instance=ExtResource("1_8nfdx")]
+layout_mode = 2
