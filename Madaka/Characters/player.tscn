@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvvkcdqwj81ee"]
+[gd_scene load_steps=8 format=3 uid="uid://bvvkcdqwj81ee"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_dv7od"]
 [ext_resource type="Texture2D" uid="uid://cew7r64ft0hvr" path="res://SproutLands/Characters/Basic Charakter Spritesheet.png" id="1_gl2ey"]
 [ext_resource type="Resource" uid="uid://ptfcat84yejp" path="res://Inventory/player_inventory.tres" id="2_mtsfv"]
 [ext_resource type="Script" path="res://UI/health.gd" id="3_5oxqx"]
 [ext_resource type="PackedScene" uid="uid://cq37bg1rlyeaa" path="res://UI/healthbar.tscn" id="4_n8qe6"]
+[ext_resource type="PackedScene" uid="uid://bfvl6yoopug83" path="res://Interaction/interacting_component.tscn" id="6_xxadj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fa6og"]
 size = Vector2(10, 5)
@@ -34,6 +35,8 @@ offset_top = -21.0
 offset_right = 25.0
 offset_bottom = 19.0
 health = NodePath("../Health")
+
+[node name="InteractingComponent" parent="." instance=ExtResource("6_xxadj")]
 
 [connection signal="damaged" from="Health" to="." method="_on_health_damaged"]
 [connection signal="death" from="Health" to="." method="_on_health_death"]

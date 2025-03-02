@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dgrjk0jkug0kl"]
+[gd_scene load_steps=18 format=3 uid="uid://dgrjk0jkug0kl"]
 
 [ext_resource type="PackedScene" uid="uid://bvvkcdqwj81ee" path="res://Characters/player.tscn" id="1_ikbhv"]
 [ext_resource type="Texture2D" uid="uid://j2j4vpvjest2" path="res://Interior/basics/curtains.png" id="3_x3gm7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://de82s5xodf18i" path="res://Interior/furniture/chairs.png" id="7_tvkh5"]
 [ext_resource type="Texture2D" uid="uid://dgj3m0h1djwck" path="res://Interior/furniture/beds_shadow.png" id="8_53kon"]
 [ext_resource type="PackedScene" uid="uid://hnh74mr58dsl" path="res://Inventory/inventory_ui.tscn" id="9_77ly0"]
+[ext_resource type="PackedScene" uid="uid://bvk7ka5idpuqo" path="res://Inventory/Items/flashlight_item.tscn" id="10_h0da4"]
 [ext_resource type="PackedScene" uid="uid://b4xtdlr0jo47x" path="res://scenes/tv.tscn" id="10_ws8fm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8pdpq"]
@@ -44439,3 +44440,6 @@ offset_left = -50.0
 offset_top = -20.0
 offset_right = 50.0
 offset_bottom = 0.0
+
+[node name="FlashlightItem" parent="." instance=ExtResource("10_h0da4")]
+position = Vector2(37, 26)
